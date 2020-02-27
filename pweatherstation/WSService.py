@@ -26,37 +26,9 @@ class WSService:
             print("Данные от датчиков представлены не в полном объеме")
             print(e)
 
-    def get_temperature(self) -> float:
+    def get_model(self):
         """
-        :return: Температура воздуха в помещении, *С
-        """
-        self._sync()
-        return self._model.temperature
-
-    def get_pressure(self) -> float:
-        """
-        :return: Давление в помещении, мм.рт.ст
+        :return: Модель с данными из датчиков
         """
         self._sync()
-        return self._model.pressure
-
-    def get_humidity(self) -> float:
-        """
-        :return: Относительная влажность в помещении, %
-        """
-        self._sync()
-        return self._model.humidity
-
-    def get_luminosity(self) -> float:
-        """
-        :return: Степень освещенности помещения, люмен
-        """
-        self._sync()
-        return self._model.luminosity
-
-    def get_altitude(self):
-        """
-        :return: Высота точки измерения относительно места установки метеостанции, м
-        """
-        self._sync()
-        return self._model.altitude
+        return self._model

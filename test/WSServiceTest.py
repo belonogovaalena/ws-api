@@ -10,15 +10,15 @@ class WSServiceTest(unittest.TestCase):
         """
         Тест, что данные от датчиков получены
         """
-        self.assertIsNotNone(self.service.get_altitude())
-        self.assertIsNotNone(self.service.get_humidity())
-        self.assertIsNotNone(self.service.get_luminosity())
-        self.assertIsNotNone(self.service.get_pressure())
-        self.assertIsNotNone(self.service.get_temperature())
+        self.assertIsNotNone(self.service.get_model().altitude)
+        self.assertIsNotNone(self.service.get_model().humidity)
+        self.assertIsNotNone(self.service.get_model().luminosity)
+        self.assertIsNotNone(self.service.get_model().pressure)
+        self.assertIsNotNone(self.service.get_model().temperature)
 
     def test_types(self):
-        self.assertIsInstance(self.service.get_altitude(), float)
-        self.assertIsInstance(self.service.get_humidity(), float)
-        self.assertIsInstance(self.service.get_luminosity(), float)
-        self.assertIsInstance(self.service.get_pressure(), float)
-        self.assertIsInstance(self.service.get_temperature(), float)
+        self.assertIsInstance(self.service.get_model().altitude, float)
+        self.assertIsInstance(self.service.get_model().humidity, float)
+        self.assertIsInstance(self.service.get_model().luminosity, float)
+        self.assertIsInstance(self.service.get_model().pressure, float)
+        self.assertIsInstance(self.service.get_model().temperature, float)
