@@ -9,14 +9,14 @@ class WSModel:
     @property
     def altitude(self) -> float:
         """
-        :return: Высота от места установки метеостанции, м
+        :return: Высота точки измерения относительно места установки метеостанции, м
         """
         return self._altitude
 
     @altitude.setter
     def altitude(self, value: float):
         """
-        :param value: Высота от места установки метеостанции, м
+        :param value: Высота точки измерения относительно места установки метеостанции, м
         """
         self._altitude = value
 
