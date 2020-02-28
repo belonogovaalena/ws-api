@@ -1,5 +1,5 @@
 import unittest
-from pweatherstation.WSService import WSService
+from WSService import WSService
 
 
 class WSServiceTest(unittest.TestCase):
