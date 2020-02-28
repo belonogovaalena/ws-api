@@ -1,3 +1,5 @@
+package weatherstation;
+
 public class WSModel {
     private float altitude;
     private float humidity;
