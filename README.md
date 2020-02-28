@@ -24,13 +24,13 @@ Weather Station API реализован на:
 from pweatherstation.WSService import WSService
 service = WSService()
 # вывод в консоль высоты измерения относительно высоты установки метеостанции
-print(service.get_altitude())
+print(service.get_model().altitude)
 # вывод в консоль температуры в помещении в *С
-print(service.get_temperature())
+print(service.get_model().temperature)
 # вывод в консоль давления в помещении в мм.рт.ст.
-print(service.get_pressure())
+print(service.get_model().pressure)
 # вывод в консоль относительной влажности в помещении в %
-print(service.get_humidity())
+print(service.get_model().humidity)
 # вывод в консоль степени освещенности помещения в люмен
-print(service.get_luminosity())
+print(service.get_model().luminosity)
 ```
