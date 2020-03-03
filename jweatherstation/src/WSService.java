@@ -27,7 +27,7 @@ public class WSService {
      */
     private void sync() {
         // запускаем обертку над драйвером, возвращающую данные от датчиков
-        String path = Paths.get(new File(System.getProperty("user.dir")).getParent(), "jdriver.py").toString();
+        String path = Paths.get(new File(System.getProperty("user.dir")).toString(), "driver", "jdriver.py").toString();
         ProcessBuilder pb = new ProcessBuilder(this.pythonPath, path);
         try {
             Process process = pb.start();

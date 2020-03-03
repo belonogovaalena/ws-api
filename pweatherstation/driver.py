@@ -1,12 +1,7 @@
 import glob
 import sys
 import subprocess
-
-try:
-    import serial
-except Exception as exception:
-    print(exception, False)
-    install('pyserial')
+import serial
 
 
 def install(package):
@@ -54,7 +49,7 @@ def serial_ports():
     return result
 
 
-def startup(dev: str = '', speed: str = '9600'):
+def startup(dev = '', speed = '9600'):
     """ Инцализация подключения к устройству.
 
     Параметры:
