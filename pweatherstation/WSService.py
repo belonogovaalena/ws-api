@@ -4,10 +4,10 @@ from WSModel import WSModel
 
 
 class WSService:
-    def __init__(self):
+    def __init__(self, speed='9600'):
         # инициализируем загрузку драйвера при подключении устройства
         self.driver = WSDriver()
-        self.driver.start_up()
+        self.driver.start_up(speed=speed)
         self._model = WSModel()
 
     def _sync(self):

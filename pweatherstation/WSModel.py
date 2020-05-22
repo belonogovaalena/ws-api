@@ -21,6 +21,12 @@ class WSModel:
         """
         self._altitude = value
 
+    def is_altitude_empty(self):
+        """
+        :return: Признак наличия высоты точки измерения относительно места установки метеостанции
+        """
+        return True if not self._altitude else False
+
     @property
     def luminosity(self) -> float:
         """
@@ -34,6 +40,12 @@ class WSModel:
         :param value: Уровень освещенности, люмен
         """
         self._luminosity = value
+
+    def is_luminosity_empty(self):
+        """
+        :return: Признак наличия уровня освещенности
+        """
+        return True if not self._luminosity else False
 
     @property
     def humidity(self) -> float:
@@ -49,6 +61,12 @@ class WSModel:
         """
         self._humidity = value
 
+    def is_humidity_empty(self):
+        """
+        :return: Признак наличия относительной влажности
+        """
+        return True if not self._humidity else False
+
     @property
     def pressure(self) -> float:
         """
@@ -62,6 +80,12 @@ class WSModel:
         :param value: Давление, мм.рт.ст
         """
         self._pressure = value
+
+    def is_pressure_empty(self):
+        """
+        :return: Признак наличия давления
+        """
+        return True if not self._pressure else False
 
     @property
     def temperature(self) -> float:
@@ -77,6 +101,12 @@ class WSModel:
         """
         self._temperature = value
 
+    def is_temperature_empty(self):
+        """
+        :return: Признак наличия температуры
+        """
+        return True if not self._temperature else False
+
     @property
     def distance(self):
         """
@@ -91,9 +121,15 @@ class WSModel:
         """
         self._distance = value
 
+    def is_distance_empty(self):
+        """
+        :return: Признак наличия высоты точки измерения относительно места установки метеостанции
+        """
+        return True if not self._altitude else False
+
     def is_empty(self) -> bool:
         """
         :return: Признак инициализации модели
         """
-        return True if not self._distance and not self._temperature and not self._pressure and not self._altitude and \
-            not self._luminosity and not self._distance else False
+        return self.is_altitude_empty() and self.is_distance_empty() and self.is_luminosity_empty() and \
+               self.is_pressure_empty() and self.is_humidity_empty() and self.is_temperature_empty()
