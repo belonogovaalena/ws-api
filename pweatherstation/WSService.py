@@ -1,5 +1,4 @@
 import re
-import driver
 from WSDriver import WSDriver
 from WSModel import WSModel
 
@@ -17,6 +16,8 @@ class WSService:
         """
         # все ошибки принтим
         line = self.driver.read_line()
+        if not line:
+            return
         # определяем формат посылки
 
         # экземпляр № 1
@@ -74,3 +75,10 @@ class WSService:
         """
         self._sync()
         return self._model
+
+
+if __name__ == '__main__':
+    s = WSService()
+    while True:
+        r = s.get_model()
+        print(r.temperature)

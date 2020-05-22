@@ -48,7 +48,10 @@ class WSDriver:
         return result
 
     def read_line(self):
-        return self.stream.readline().decode("utf-8")[:-1]
+        if self.stream:
+            return self.stream.readline().decode("utf-8")[:-1]
+        else:
+            return None
 
     def get_port(self):
         return self.stream._port
