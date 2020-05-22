@@ -1,11 +1,11 @@
 class WSModel:
-    def __init__(self):
-        self._altitude = None
-        self._luminosity = None
-        self._humidity = None
-        self._pressure = None
-        self._temperature = None
-        self._distance = None
+    def __init__(self, altitude=None, luminosity=None, humidity=None, pressure=None, temperature=None, distance=None):
+        self._altitude = altitude
+        self._luminosity = luminosity
+        self._humidity = humidity
+        self._pressure = pressure
+        self._temperature = temperature
+        self._distance = distance
 
     @property
     def altitude(self) -> float:
