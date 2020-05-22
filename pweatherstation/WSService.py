@@ -1,12 +1,14 @@
 import re
 import driver
+from WSDriver import WSDriver
 from WSModel import WSModel
 
 
 class WSService:
     def __init__(self):
         # инициализируем загрузку драйвера при подключении устройства
-        driver.startup()
+        self.driver = WSDriver()
+        self.driver.start_up()
         self._model = WSModel()
 
     def _sync(self):
@@ -14,7 +16,7 @@ class WSService:
         Синхронизирует данные модели с данными от датчиков
         """
         # все ошибки принтим
-        line = driver.read_line()
+        line = self.driver.read_line()
         # определяем формат посылки
 
         # экземпляр № 1
@@ -34,32 +36,32 @@ class WSService:
         # экземпляр № 2
         elif 'Light' in line:
             self._model.luminosity = float(re.search('Light:(\d+) lux', line).group(1))
-            temp_hum_line = driver.read_line()
+            temp_hum_line = self.driver.read_line()
             result = re.search('Temp:([-\d\.]+) °C Hum:([\d\.]+) %', temp_hum_line)
             self._model.temperature = float(result.group(1))
             self._model.humidity = float(result.group(2))
-            dist_line = driver.read_line()
+            dist_line = self.driver.read_line()
             self._model.distance = float(re.search('Dist:([\d\.]+) cm', dist_line).group(1))
-            press_alt_line = driver.read_line()
+            press_alt_line = self.driver.read_line()
             result = re.match('Pres:([\d\.]+) Att:([-\d\.]+)', press_alt_line)
             self._model.pressure = float(result.group(1))
             self._model.altitude = float(result.group(2))
-            driver.read_line()
+            self.driver.read_line()
             return
         # экземпляр № 3
         elif 'Влажность' in line:
             self._model.humidity = float(re.search('Влажность:([\d\.]+)%', line).group(1))
-            temp_line = driver.read_line()
+            temp_line = self.driver.read_line()
             self._model.temperature = float(re.search('Температура:([-\d\.]+)°C', temp_line).group(1))
             # не доделано со стороны группы
-            driver.read_line()
-            lum_line = driver.read_line()
+            self.driver.read_line()
+            lum_line = self.driver.read_line()
             self._model.luminosity = float(re.search('Свет:([-\d\.]+) lux', lum_line).group(1))
-            press_line = driver.read_line()
+            press_line = self.driver.read_line()
             self._model.pressure = float(re.search('Давление:([-\d\.]+)мм.рт.ст.', press_line).group(1))
-            alt_line = driver.read_line()
+            alt_line = self.driver.read_line()
             self._model.altitude = float(re.search('Высота:([-\d\.]+)м.', alt_line).group(1))
-            driver.read_line()
+            self.driver.read_line()
             return
         if len(line.split(' ')) > 0:
             if 'ERROR' in line.split(' ')[1]:

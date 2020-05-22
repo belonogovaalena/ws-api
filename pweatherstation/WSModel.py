@@ -79,8 +79,14 @@ class WSModel:
 
     @property
     def distance(self):
+        """
+        :return: Расстрояние до ближайшего сотрудника, см
+        """
         return self._distance
 
     @distance.setter
-    def distance(self, value):
+    def distance(self, value: float):
+        """
+        :param value: Расстрояние до ближайшего сотрудника, см
+        """
         self._distance = value
