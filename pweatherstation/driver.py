@@ -42,7 +42,7 @@ def serial_ports():
 
     for device in result:
         if ('serial' in device) or ('USB' in device):
-            tmp = device;
+            tmp = device
             result.remove(device)
             result.insert(0, tmp)
             break

@@ -5,6 +5,7 @@ class WSModel:
         self._humidity = None
         self._pressure = None
         self._temperature = None
+        self._distance = None
 
     @property
     def altitude(self) -> float:
@@ -75,3 +76,11 @@ class WSModel:
         :param value: Температура, *С
         """
         self._temperature = value
+
+    @property
+    def distance(self):
+        return self._distance
+
+    @distance.setter
+    def distance(self, value):
+        self._distance = value
