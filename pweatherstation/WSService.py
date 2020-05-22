@@ -75,10 +75,3 @@ class WSService:
         """
         self._sync()
         return self._model
-
-
-if __name__ == '__main__':
-    s = WSService()
-    while True:
-        r = s.get_model()
-        print(r.temperature)

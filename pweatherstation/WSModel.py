@@ -90,3 +90,10 @@ class WSModel:
         :param value: Расстрояние до ближайшего сотрудника, см
         """
         self._distance = value
+
+    def is_empty(self) -> bool:
+        """
+        :return: Признак инициализации модели
+        """
+        return True if not self._distance and not self._temperature and not self._pressure and not self._altitude and \
+            not self._luminosity and not self._distance else False
