@@ -1,6 +1,6 @@
 import glob
 import sys
-
+import logging
 import serial
 
 

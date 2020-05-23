@@ -1,14 +1,44 @@
+import logging
+import os
 import re
+from logging.handlers import TimedRotatingFileHandler
+from pathlib import Path
+
 from WSDriver import WSDriver
 from WSModel import WSModel
 
 
 class WSService:
-    def __init__(self, speed='9600'):
+    def __init__(self, speed='9600', export_log=False):
+        self.logger = None
+        if export_log:
+            self.__init_logger()
+
         # инициализируем загрузку драйвера при подключении устройства
         self.driver = WSDriver()
-        self.driver.start_up(speed=speed)
+        if self.driver.start_up(speed=speed) == 1:
+            if self.logger is not None:
+                self.logger.info("Connection to COM-port established")
+        elif self.driver.start_up(speed=speed) == -1:
+            if self.logger is not None:
+                self.logger.info("Connection to COM-port not established")
+
         self._model = WSModel()
+
+    def __init_logger(self):
+        project_path = Path(__file__).parent.parent
+        log_path = os.path.join(project_path, 'log')
+        if not os.path.exists(log_path):
+            os.mkdir(log_path)
+        self.logger = logging.getLogger('wsservice')
+
+        log_handler = TimedRotatingFileHandler(filename=os.path.join(log_path, 'wsservice.log'),
+                                               when="midnight")
+        log_formatter = logging.Formatter('%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s')
+        log_handler.setFormatter(log_formatter)
+        self.logger.addHandler(log_handler)
+        self.logger.setLevel(logging.INFO)
+        self.logger.info("WSService running...")
 
     def _sync(self):
         """
@@ -34,6 +64,7 @@ class WSService:
             except IndexError as e:
                 print("Данные от датчиков представлены не в полном объеме")
                 print(e)
+
         # экземпляр № 2
         elif 'Light' in line:
             self._model.luminosity = float(re.search('Light:(\d+) lux', line).group(1))
@@ -75,3 +106,7 @@ class WSService:
         """
         self._sync()
         return self._model
+
+if __name__ == '__main__':
+    w = WSService(export_log=True)
+    w.get_model()

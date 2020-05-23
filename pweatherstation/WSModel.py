@@ -21,7 +21,7 @@ class WSModel:
         """
         self._altitude = value
 
-    def is_altitude_empty(self):
+    def is_altitude_empty(self) -> bool:
         """
         :return: Признак наличия высоты точки измерения относительно места установки метеостанции
         """
@@ -41,7 +41,7 @@ class WSModel:
         """
         self._luminosity = value
 
-    def is_luminosity_empty(self):
+    def is_luminosity_empty(self) -> bool:
         """
         :return: Признак наличия уровня освещенности
         """
@@ -81,7 +81,7 @@ class WSModel:
         """
         self._pressure = value
 
-    def is_pressure_empty(self):
+    def is_pressure_empty(self)-> bool:
         """
         :return: Признак наличия давления
         """
@@ -101,7 +101,7 @@ class WSModel:
         """
         self._temperature = value
 
-    def is_temperature_empty(self):
+    def is_temperature_empty(self)-> bool:
         """
         :return: Признак наличия температуры
         """
@@ -121,7 +121,7 @@ class WSModel:
         """
         self._distance = value
 
-    def is_distance_empty(self):
+    def is_distance_empty(self) -> bool:
         """
         :return: Признак наличия высоты точки измерения относительно места установки метеостанции
         """
