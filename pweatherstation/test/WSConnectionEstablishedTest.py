@@ -7,7 +7,6 @@ class WSConnectionEstablishedTest(unittest.TestCase):
         self.driver = WSDriver()
 
     def test(self):
-        self.assertTrue(True)
         self.assertIs(self.driver.start_up(), 1)
 
 

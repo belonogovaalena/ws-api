@@ -44,10 +44,14 @@ class WSService:
         """
         Синхронизирует данные модели с данными от датчиков
         """
+        self._model.clear()
         # все ошибки принтим
         line = self.driver.read_line()
         if not line:
-            return
+            return -1
+        else:
+            if self.logger is not None:
+                self.logger.info("Package recieved: {0} characters".format(len(line)))
         # определяем формат посылки
 
         # экземпляр № 1
@@ -60,7 +64,7 @@ class WSService:
                 self._model.pressure = float(values[3].split(':')[-1])
                 self._model.altitude = float(values[4].split(':')[-1])
                 self._model.distance = None
-                return
+                return 1
             except IndexError as e:
                 print("Данные от датчиков представлены не в полном объеме")
                 print(e)
@@ -79,7 +83,8 @@ class WSService:
             self._model.pressure = float(result.group(1))
             self._model.altitude = float(result.group(2))
             self.driver.read_line()
-            return
+            return 1
+
         # экземпляр № 3
         elif 'Влажность' in line:
             self._model.humidity = float(re.search('Влажность:([\d\.]+)%', line).group(1))
@@ -94,18 +99,24 @@ class WSService:
             alt_line = self.driver.read_line()
             self._model.altitude = float(re.search('Высота:([-\d\.]+)м.', alt_line).group(1))
             self.driver.read_line()
-            return
-        if len(line.split(' ')) > 0:
-            if 'ERROR' in line.split(' ')[1]:
-                print(line)
-                return
+            return 1
+
+        else:
+            if len(line.split(' ')) > 0:
+                if 'ERROR' in line.split(' ')[1]:
+                    print(line)
+            return -1
 
     def get_model(self):
         """
         :return: Модель с данными из датчиков
         """
-        self._sync()
+        if self._sync() == 1 and self.logger is not None:
+            self.logger.info("Parameters received")
+        if not self._model.is_empty() and self.logger is not None:
+            self.logger.info("Request to getting parameters. Model isn't empty")
         return self._model
+
 
 if __name__ == '__main__':
     w = WSService(export_log=True)

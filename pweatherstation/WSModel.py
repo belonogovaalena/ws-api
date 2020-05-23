@@ -133,3 +133,15 @@ class WSModel:
         """
         return self.is_altitude_empty() and self.is_distance_empty() and self.is_luminosity_empty() and \
                self.is_pressure_empty() and self.is_humidity_empty() and self.is_temperature_empty()
+
+    def to_string(self):
+        return("Altitude: {0}, Distance: {1}, Luminosity: {2}, Pressure: {3}, Humidity: {4}, Temperature: {5}".format(
+            self.altitude, self.distance, self.luminosity, self.pressure, self.humidity, self.temperature))
+
+    def clear(self):
+        self._altitude = None
+        self._luminosity = None
+        self._temperature = None
+        self._humidity = None
+        self._pressure = None
+        self._distance = None
