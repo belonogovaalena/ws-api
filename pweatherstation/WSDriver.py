@@ -45,6 +45,7 @@ class WSDriver:
                 result.remove(device)
                 result.insert(0, tmp)
                 break
+        print(result)
         return result
 
     def read_line(self):

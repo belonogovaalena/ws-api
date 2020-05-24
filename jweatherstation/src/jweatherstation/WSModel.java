@@ -1,9 +1,12 @@
+package jweatherstation;
+
 public class WSModel {
     private float altitude;
     private float humidity;
     private float luminosity;
     private float pressure;
     private float temperature;
+    private float distance;
 
     public WSModel() {}
 
@@ -13,13 +16,15 @@ public class WSModel {
      * @param luminosity Уровень освещенности, люмен
      * @param pressure Давление, мм.рт.ст
      * @param temperature Температура, *С
+     * @param distance Расстояние до пользателя, см
      */
-    public WSModel(float altitude, float humidity, float luminosity, float pressure, float temperature) {
+    public WSModel(float altitude, float humidity, float luminosity, float pressure, float temperature, float distance) {
         this.altitude = altitude;
         this.humidity = humidity;
         this.luminosity = luminosity;
         this.pressure = pressure;
         this.temperature = temperature;
+        this.distance = distance;
     }
 
     /**
@@ -90,5 +95,31 @@ public class WSModel {
      */
     public void setTemperature(float temperature) {
         this.temperature = temperature;
+    }
+
+    /**
+     * @return Расстояние до пользователя, см
+     */
+    public float getDistance() {
+        return distance;
+    }
+
+    /**
+     * @param distance Расстояние до пользователя, см
+     */
+    public void setDistance(float distance) {
+        this.distance = distance;
+    }
+
+    @Override
+    public String toString() {
+        return "WSModel{" +
+                "altitude=" + altitude +
+                ", humidity=" + humidity +
+                ", luminosity=" + luminosity +
+                ", pressure=" + pressure +
+                ", temperature=" + temperature +
+                ", distance=" + distance +
+                '}';
     }
 }
